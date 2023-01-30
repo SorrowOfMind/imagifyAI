@@ -2,9 +2,9 @@
 function App() {
 
   return (
-    <div className="App">
-
-    </div>
+    <h1 className="text-3xl">
+      imagifyAI
+    </h1>
   )
 }
 
