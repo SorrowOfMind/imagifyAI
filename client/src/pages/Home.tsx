@@ -1,4 +1,5 @@
-import { Form } from "react-router-dom"
+import CardsRenderer from "../components/CardsRenderer";
+import Form from "../components/Form";
 import useFetch from "../hooks/useFetch";
 
 const Home = () => {
@@ -22,7 +23,10 @@ const Home = () => {
           (<>
             {searchText && (<h3>Results for {searchText}</h3>)}
             <div className="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3">
-              {/* cards here */}
+              {searchText ? 
+                (<CardsRenderer data={[1, 2, 3]} title="No search results found"/>)  :
+                (<CardsRenderer data={[]} title="No images found"/>)
+              }
             </div>
           </>)
         }
