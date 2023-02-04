@@ -1,4 +1,4 @@
-import { Form } from "react-router-dom"
+import FormInput from "../components/FormInput";
 import useFetch from "../hooks/useFetch";
 
 const Home = () => {
@@ -13,7 +13,7 @@ const Home = () => {
       </div>
 
       <div className="mt-16">
-        <Form />
+        <FormInput />
       </div>
 
       <div className="mt-10">
