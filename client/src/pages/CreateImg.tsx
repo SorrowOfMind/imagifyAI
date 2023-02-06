@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import FormInput from "../components/FormInput";
 
@@ -10,10 +10,13 @@ interface FormDataInterface {
 const CreateImg = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState<FormDataInterface>();
-  const nicknameRef = useRef<HTMLInputElement>();
+  const nicknameRef = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const nick = nicknameRef.current!.value;
 
+    
   }
 
   return (
@@ -25,8 +28,14 @@ const CreateImg = () => {
 
       <form className="max-w-3xl mt-16" onSubmit={handleSubmit}>
         <div className="flex gap-5 flex-col">
-          <FormInput ref={nicknameRef} />
-          <FormInput />
+          <FormInput 
+            ref={nicknameRef} 
+            label="Your nickname" 
+            type="text"
+            placeholder="Unknown"
+            name="nickname"
+            value={formData!.nickname}
+          />
         </div>
       </form>
     </section>
