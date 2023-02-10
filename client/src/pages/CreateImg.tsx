@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import FormInput from "../components/FormInput";
+import Image from "../components/Image";
 
 interface FormDataInterface {
   nickname: string;
@@ -8,15 +9,22 @@ interface FormDataInterface {
 }
 
 const CreateImg = () => {
+  const [isGenerating, setIsGenerating] = useState<boolean>(false);
+  const [formData, setFormData] = useState<FormDataInterface>({
+    nickname: "Unknown",
+    photo: ""
+  });
   const navigate = useNavigate();
-  const [formData, setFormData] = useState<FormDataInterface>();
   const nicknameRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const nick = nicknameRef.current!.value;
-
     
+  }
+
+  const generateImg = () => {
+
   }
 
   return (
@@ -34,10 +42,21 @@ const CreateImg = () => {
             type="text"
             placeholder="Unknown"
             name="nickname"
-            value={formData!.nickname}
           />
         </div>
       </form>
+
+      <Image photo={formData!.photo} isGenerating={isGenerating}/>
+
+      <div className="mt5">
+        <button 
+          type="button" 
+          onClick={generateImg}
+          className="rounded-md text-white text-sm bg-lightGreen w-full sm:w-auto px-5 py-2.5 text-center hover:bg-lightGreen2 transition-colors duration-100"
+        >
+          {isGenerating ? "Generating..." : "Generate"}
+        </button>
+      </div>
     </section>
   )
 }

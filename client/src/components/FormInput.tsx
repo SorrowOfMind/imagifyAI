@@ -2,13 +2,12 @@ import { forwardRef, useId } from 'react'
 
 interface FormInputProps {
   label: string;
-  value: string;
   name: string;
   type: string;
   placeholder?: string;
 }
 
-const FormInput = forwardRef<HTMLInputElement, FormInputProps>(({label, value, name, type, placeholder}, ref) => {
+const FormInput = forwardRef<HTMLInputElement, FormInputProps>(({label, name, type, placeholder}, ref) => {
   const id = useId();
   return (
     <div>
@@ -18,7 +17,6 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(({label, value, n
           type={type} 
           id={id} 
           name={name}
-          value={value}
           ref={ref}
           placeholder={placeholder}
         />

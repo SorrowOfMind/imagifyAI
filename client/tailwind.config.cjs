@@ -1,16 +1,21 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require("tailwindcss/colors");
+
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     colors: {
       blue: "#181b3a",
       mainBlue: "#0a0e29",
-      orangeGradientRight: "linear-gradient(to right, #f0621b, #f0572e, #ee4c3c, #ea4349, #e43c55)",
       orange: "#f0621b",
       rose: "#e43c55",
       lightGreen: "#00da98",
+      lightGreen2: "#03C288",
       grey: "#bfdceb",
-      purple: "#5720b6"
+      purple: "#5720b6",
+      tOrange: colors.orange,
+      tRed: colors.red,
+      white: colors.white
     },
     extend: {
       screens: {
