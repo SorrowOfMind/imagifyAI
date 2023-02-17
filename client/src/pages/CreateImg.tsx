@@ -6,16 +6,20 @@ import Image from "../components/Image";
 interface FormDataInterface {
   nickname: string;
   photo: string;
+  prompt: string;
 }
 
 const CreateImg = () => {
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
+  const [isSharing, setIsSharing] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormDataInterface>({
     nickname: "Unknown",
-    photo: ""
+    photo: "",
+    prompt: ""
   });
   const navigate = useNavigate();
   const nicknameRef = useRef<HTMLInputElement>(null);
+  const promptRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,6 +48,15 @@ const CreateImg = () => {
             name="nickname"
           />
         </div>
+        <div className="flex gap-5 flex-col">
+          <FormInput 
+            ref={promptRef} 
+            label="Prompt" 
+            type="text"
+            placeholder="What should be generated?"
+            name="prompt"
+          />
+        </div>
       </form>
 
       <Image photo={formData!.photo} isGenerating={isGenerating}/>
@@ -57,6 +70,13 @@ const CreateImg = () => {
           {isGenerating ? "Generating..." : "Generate"}
         </button>
       </div>
+
+      <div className="mt-10">
+        <button type="submit" className="mt-3">
+          {isSharing ? "Sharing..." : "Share"}
+        </button>
+      </div>
+
     </section>
   )
 }
