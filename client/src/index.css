@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shrikhand&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * {
   font-family: 'Hind Siliguri', sans-serif;
-  color: #bfdceb; 
+  color: #fff; 
 }
 
 @media screen and (min-width: 480px) {
@@ -27,5 +28,15 @@
 @layer components {
   .container {
     @apply mx-auto max-w-screen-2xl;
+    position: relative;
+  }
+
+  .clipped-decor {
+    clip-path: polygon(100% 0, 100% 100%, 66% 81%, 0 100%, 0 0);
+    background-image: linear-gradient(to right top, #333399, #6836ae, #9a33be, #cd27c8, #ff00cc);
+  }
+
+  .logo {
+    font-family: 'Shrikhand', cursive;
   }
 }

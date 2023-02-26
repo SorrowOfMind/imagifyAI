@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom'
+import Logo from './Logo'
 
 const Header = () => {
 
   
   return (
-    <header className="w-full py-4 px-4 shadow-2xl shadow-grey bg-blue">
+    <header className="w-full py-4 px-4">
         <div className="container">
             <Link to="/">
-                {/* <img src="" alt="logo" className=""/> */}
-                imagifyAI
+                <Logo/>
             </Link>
         </div>
     </header>

@@ -3,33 +3,40 @@ import { useNavigate } from "react-router-dom"
 import FormInput from "../components/FormInput";
 import Image from "../components/Image";
 
-interface FormDataInterface {
-  nickname: string;
-  photo: string;
-  prompt: string;
-}
 
 const CreateImg = () => {
-  const [isGenerating, setIsGenerating] = useState<boolean>(false);
-  const [isSharing, setIsSharing] = useState<boolean>(false);
-  const [formData, setFormData] = useState<FormDataInterface>({
-    nickname: "Unknown",
-    photo: "",
-    prompt: ""
-  });
-  const navigate = useNavigate();
-  const nicknameRef = useRef<HTMLInputElement>(null);
+  const [isGenerating, setGenerating] = useState<boolean>(false);
+  const [photo, setPhoto] = useState<string>("");
+  const [responseError, setResponseError] = useState<string>("");
   const promptRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const nick = nicknameRef.current!.value;
-    
+    const {value} = promptRef.current!;
+    if (value !== "") {
+      console.log(value);
+      generateImg(value);
+    }
   }
 
-  const generateImg = () => {
-
-  }
+  const generateImg = async (prompt: string) => {
+    setGenerating(true);
+    try {
+      const data = await fetch(import.meta.env.VITE_OPENAI_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({prompt})
+      });
+      const result = await data.json();
+      setPhoto(result);
+    } catch (error) { 
+      setResponseError(error as string);
+    } finally {
+      setGenerating(false);
+    }
+  } 
 
   return (
     <section className="container">
@@ -39,43 +46,17 @@ const CreateImg = () => {
       </div>
 
       <form className="max-w-3xl mt-16" onSubmit={handleSubmit}>
-        <div className="flex gap-5 flex-col">
           <FormInput 
-            ref={nicknameRef} 
-            label="Your nickname" 
-            type="text"
-            placeholder="Unknown"
-            name="nickname"
-          />
-        </div>
-        <div className="flex gap-5 flex-col">
-          <FormInput 
-            ref={promptRef} 
+            ref={promptRef}
             label="Prompt" 
             type="text"
             placeholder="What should be generated?"
             name="prompt"
           />
-        </div>
+          <button>Generate</button>
       </form>
 
-      <Image photo={formData!.photo} isGenerating={isGenerating}/>
-
-      <div className="mt5">
-        <button 
-          type="button" 
-          onClick={generateImg}
-          className="rounded-md text-white text-sm bg-lightGreen w-full sm:w-auto px-5 py-2.5 text-center hover:bg-lightGreen2 transition-colors duration-100"
-        >
-          {isGenerating ? "Generating..." : "Generate"}
-        </button>
-      </div>
-
-      <div className="mt-10">
-        <button type="submit" className="mt-3">
-          {isSharing ? "Sharing..." : "Share"}
-        </button>
-      </div>
+      <Image photo={photo} isGenerating={isGenerating}/>
 
     </section>
   )

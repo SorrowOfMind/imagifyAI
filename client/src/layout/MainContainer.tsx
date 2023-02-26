@@ -1,9 +1,9 @@
-import { Outlet } from "react-router-dom"
+import React from "react"
 
-const MainContainer = () => {
+const MainContainer = ({children}: {children: React.ReactNode}) => {
   return (
-    <main className="w-full sm:p-8 py-8 px-4 bg-mainBlue min-h-[calc(100vh-73px)]">
-        <Outlet/>
+    <main className="w-full min-h-screen container">
+        {children}
     </main>
   )
 }

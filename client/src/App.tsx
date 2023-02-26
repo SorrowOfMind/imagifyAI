@@ -1,21 +1,21 @@
 import { Route, Routes } from "react-router-dom"
-import Header from "./components/Header"
-import MainContainer from "./layout/MainContainer"
-import CreateImg from "./pages/CreateImg"
-import Home from "./pages/Home"
+
+import {Header} from "./components";
+import {MainContainer, Decor} from "./layout";
+import {Home, CreateImg} from "./pages"
 
 function App() {
-
   return (
-    <>
-      <Header/>
-      <Routes>
-        <Route element={<MainContainer/>}>
-          <Route index element={<Home/>}/>
-          <Route path="create-img" element={<CreateImg/>}/>
-        </Route>
-      </Routes>
-    </>
+    <div className="w-full h-full min-h-screen bg-white">
+      <Decor/>
+      <MainContainer>
+        <Header/>
+        <Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path="create" element={<CreateImg/>}/>
+        </Routes>
+      </MainContainer>
+    </div>
   )
 }
 
