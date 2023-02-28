@@ -14,7 +14,6 @@ const CreateImg = () => {
     e.preventDefault();
     const {value} = promptRef.current!;
     if (value !== "") {
-      console.log(value);
       generateImg(value);
     }
   }
@@ -30,13 +29,21 @@ const CreateImg = () => {
         body: JSON.stringify({prompt})
       });
       const result = await data.json();
-      setPhoto(result);
+      setPhoto(`data:image/jpeg;base64,${result.photo}`);
     } catch (error) { 
       setResponseError(error as string);
     } finally {
       setGenerating(false);
     }
-  } 
+  }
+
+  const downloadImg = () => {
+
+  }
+
+  const shareImage = () => {
+
+  }
 
   return (
     <section className="container">
@@ -57,7 +64,7 @@ const CreateImg = () => {
       </form>
 
       <Image photo={photo} isGenerating={isGenerating}/>
-
+     
     </section>
   )
 }
